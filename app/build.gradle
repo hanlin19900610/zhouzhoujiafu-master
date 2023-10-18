@@ -1,0 +1,92 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+}
+
+android {
+    compileSdk BuildVersion.compileSdkVersion
+    namespace 'com.mufeng.demo'
+
+    defaultConfig {
+        applicationId "com.mufeng.demo"
+        minSdk BuildVersion.minSdkVersion
+        targetSdk BuildVersion.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file("wanmeng.jks")
+            storePassword "wmkj@2023"
+            keyAlias "wanmeng"
+            keyPassword "wmkj@2023"
+        }
+        release {
+            storeFile file("wanmeng.jks")
+            storePassword "wmkj@2023"
+            keyAlias "wanmeng"
+            keyPassword "wmkj@2023"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    viewBinding {
+        enabled = true
+    }
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+}
+
+dependencies {
+    implementation "androidx.constraintlayout:constraintlayout:${Versions.constraintlayout_version}"
+    implementation project(path: ':MFSocialApi')
+    implementation project(path: ':MFLibs')
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+    implementation "androidx.multidex:multidex:${Versions.multidex_version}"//分包
+
+    //滚动选择器 https://github.com/Bigkoo/Android-PickerView
+    implementation "com.contrarywind:Android-PickerView:4.1.9"
+
+    //多图选择 https://github.com/LuckSiege/PictureSelector
+    // PictureSelector 基础 (必须)
+    implementation "io.github.lucksiege:pictureselector:v3.10.7"
+    implementation "io.github.lucksiege:compress:v3.10.7"
+    implementation "io.github.lucksiege:ucrop:v3.10.7"
+    implementation "io.github.lucksiege:camerax:v3.10.7"
+
+    implementation "com.github.hackware1993:MagicIndicator:1.7.0"
+
+    implementation "io.github.youth5201314:banner:2.2.2"
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}

@@ -1,0 +1,130 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'com.mufeng.libs'
+    compileSdk BuildVersion.compileSdkVersion
+
+    defaultConfig {
+        minSdk BuildVersion.minSdkVersion
+        targetSdk BuildVersion.targetSdkVersion
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    viewBinding {
+        enabled = true
+    }
+
+    //kapt传参方式
+    kapt {
+        arguments {
+            arg("rxhttp_rxjava", "3.1.6")
+        }
+    }
+    lint {
+        abortOnError false
+    }
+}
+
+dependencies {
+    api "androidx.core:core-ktx:${Versions.core_ktx_version}"
+    api "androidx.appcompat:appcompat:${Versions.appcompat_version}"
+    api "com.google.android.material:material:${Versions.material_version}"
+    api "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin_version}"
+
+    //lifecycle
+    api "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle_version}"
+    api "androidx.lifecycle:lifecycle-common-java8:${Versions.lifecycle_version}"
+    api "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle_extensions_version}"
+
+    // viewModel
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle_version}"
+
+    // liveData
+    api "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle_version}"
+    api "androidx.activity:activity-ktx:${Versions.activity_version}"
+    api "androidx.fragment:fragment-ktx:${Versions.fragment_version}"
+
+    // 对话框 https://github.com/li-xiaojun/XPopup
+    api "com.github.li-xiaojun:XPopup:${Versions.xpopup_version}"
+
+    // 事件总线
+    api "io.github.jeremyliao:live-event-bus-x:${Versions.live_event_bus_version}"
+
+    // 状态栏 https://github.com/gyf-dev/ImmersionBar
+    api "com.geyifeng.immersionbar:immersionbar:${Versions.immersionbar_version}"
+    api "com.geyifeng.immersionbar:immersionbar-ktx:${Versions.immersionbar_version}"
+
+    /// 通过标签直接生成shape，无需再写shape.xml https://github.com/JavaNoober/BackgroundLibrary
+    api "com.github.JavaNoober.BackgroundLibrary:libraryx:${Versions.background_library_version}"
+
+    // 网络请求 https://github.com/liujingxing/rxhttp
+    api "com.github.liujingxing.rxhttp:rxhttp:${Versions.rxhttp_version}"
+    api "com.squareup.okhttp3:okhttp:${Versions.okhttp_version}"
+    api "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp_version}"
+    api "com.github.liujingxing.rxlife:rxlife-coroutine:${Versions.rxhttp_rxlife_coroutine_version}"
+
+    api "com.github.liujingxing.rxhttp:converter-moshi:3.0.2"
+    //管理协程生命周期，页面销毁，关闭请求
+    kapt "com.github.liujingxing.rxhttp:rxhttp-compiler:${Versions.rxhttp_version}" //生成RxHttp类
+
+    //rxjava3
+    api "io.reactivex.rxjava3:rxjava:${Versions.rxjava3_version}"
+    api "io.reactivex.rxjava3:rxandroid:${Versions.rxandroid_version}"
+    api "com.github.liujingxing.rxlife:rxlife-rxjava3:${Versions.rxhttp_rxlife_version}"
+
+    //下拉刷新库 https://github.com/scwang90/SmartRefreshLayout
+    api "io.github.scwang90:refresh-layout-kernel:${Versions.smart_refresh_version}"
+    api "io.github.scwang90:refresh-header-classics:${Versions.smart_refresh_version}"
+    api "io.github.scwang90:refresh-footer-classics:${Versions.smart_refresh_version}"
+
+    //recycleview管理 https://github.com/CymChad/BaseRecyclerViewAdapterHelper
+    api "io.github.cymchad:BaseRecyclerViewAdapterHelper:${Versions.recyclerview_adapter_version}"
+
+    //圆形头像 https://github.com/vinc3m1/RoundedImageView
+    api "com.makeramen:roundedimageview:2.3.0"
+
+    // 屏幕适配
+    api "com.github.JessYanCoding:AndroidAutoSize:v1.2.1"
+
+    // 工具类
+    api "com.blankj:utilcodex:1.31.1"
+    api "com.alibaba:fastjson:2.0.23"
+    api "com.google.code.gson:gson:2.10.1"
+
+    api "com.itxca.msa:msa:1.0.4"
+    api "com.tencent:mmkv-static:1.2.10"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
+    api "com.google.android.flexbox:flexbox:3.0.0"
+
+    //图片加载
+    api "com.github.bumptech.glide:glide:4.12.0"
+    api "jp.wasabeef:glide-transformations:4.1.0"//高斯模糊
+
+    //数据保存，用于cookie持久化
+    api "androidx.datastore:datastore-preferences:1.0.0"
+    api "androidx.datastore:datastore-core:1.0.0"
+    api "org.jetbrains.kotlin:kotlin-reflect:1.7.21"
+
+    api "com.airbnb.android:lottie:4.2.2"
+
+}

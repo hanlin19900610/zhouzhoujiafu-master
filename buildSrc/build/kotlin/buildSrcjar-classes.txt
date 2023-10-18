@@ -1,0 +1,1 @@
+/Users/mufeng/work/android/AndroidProjectTemplates/buildSrc/build/classes/kotlin/main/BuildVersion.class:/Users/mufeng/work/android/AndroidProjectTemplates/buildSrc/build/classes/kotlin/main/Versions.class

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!--支付宝支付必须设置 不然无法调起支付宝app支付-->
+    <queries>
+        <package android:name="com.eg.android.AlipayGphone" />
+        <package android:name="hk.alipay.wallet" />
+        <package android:name="com.tencent.mm" />
+        <package android:name="com.tencent.qqlite" />
+        <package android:name="com.tencent.mobileqq" />
+        <package android:name="com.tencent.mobileqqi" />
+        <package android:name="com.tencent.tim" />
+        <package android:name="com.sina.weibo" />
+        <package android:name="com.eg.android.AlipayGphone" />
+    </queries>
+    <application>
+
+
+        <!--QQ-->
+        <provider
+            android:authorities="com.tencent.sample.fileprovider"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"/>
+        </provider>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!--Weixin-->
+        <activity
+            android:name=".handler.wx.WXCallbackActivity"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Translucent" />
+
+        <activity
+            android:name=".handler.wx.WXPayCallbackActivity"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Translucent" />
+        <!-- 微信支付 -->
+        <activity-alias
+            android:name="${applicationId}.wxapi.WXEntryActivity"
+            android:exported="true"
+            android:targetActivity=".handler.wx.WXCallbackActivity"
+            android:theme="@android:style/Theme.Translucent" />
+
+        <activity-alias
+            android:name="${applicationId}.wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:targetActivity=".handler.wx.WXPayCallbackActivity"
+            android:theme="@android:style/Theme.Translucent" />
+
+    </application>
+</manifest>
